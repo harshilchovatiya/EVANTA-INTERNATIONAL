@@ -1260,10 +1260,11 @@ Sidebar Modal CSS
 }
 
 @media only screen and (max-width: 767px) {
-  .topbar-area .container-fluid {
+  .topbar-area,.topbar-area .container-fluid {
     padding-right: var(--bs-gutter-x, 0.75rem);
     padding-left: var(--bs-gutter-x, 0.75rem);
     max-width: 540px;
+    display: none;
   }
   .topbar-information li {
     margin-bottom: 10px;
