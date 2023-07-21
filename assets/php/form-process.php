@@ -1,77 +1,103 @@
 <?php
 // Include PHPMailer library
-require 'path_to_phpmailer/PHPMailerAutoload.php';
+// require 'path_to_phpmailer/PHPMailerAutoload.php';
 
-// Function to send email
+// // Function to send email
+// // function sendEmail($name, $email, $msg_subject, $phone_number, $message) {
+// //     $mail = new PHPMailer();
+// //     $mail->isSMTP();
+// //     $mail->Host = 'your_smtp_host'; // Replace with your SMTP host
+// //     $mail->SMTPAuth = true;
+// //     $mail->Username = 'your_smtp_username'; // Replace with your SMTP username
+// //     $mail->Password = 'your_smtp_password'; // Replace with your SMTP password
+// //     $mail->SMTPSecure = 'tls';
+// //     $mail->Port = 587;
+
+// //     $mail->setFrom('harshilbmk@example.com', 'Harshil Chovatiya'); // Replace with your email and name
+// //     $mail->addAddress($email); // Replace with recipient email
+
+// //     $mail->Subject = 'New Contact Form Submission';
+// //     $mail->Body = "Name: $name\nEmail: $email\nSubject: $msg_subject\nPhone: $phone_number\nMessage: $message";
+
+// //     if ($mail->send()) {
+// //         return true;
+// //     } else {
+// //         return false;
+// //     }
+// // }
+
+// // Function to send email
 // function sendEmail($name, $email, $msg_subject, $phone_number, $message) {
-//     $mail = new PHPMailer();
-//     $mail->isSMTP();
-//     $mail->Host = 'your_smtp_host'; // Replace with your SMTP host
-//     $mail->SMTPAuth = true;
-//     $mail->Username = 'your_smtp_username'; // Replace with your SMTP username
-//     $mail->Password = 'your_smtp_password'; // Replace with your SMTP password
-//     $mail->SMTPSecure = 'tls';
-//     $mail->Port = 587;
+//     $from = "bmuit26@gmail.com"
+//     // $to = $email; // Replace with recipient email address
+//     $subject = 'New Contact Form Submission';
 
-//     $mail->setFrom('harshilbmk@example.com', 'Harshil Chovatiya'); // Replace with your email and name
-//     $mail->addAddress($email); // Replace with recipient email
+//     // Email headers
+//     $headers = "From: $from" . "\r\n" .
+//         "Reply-To: $email" . "\r\n" .
+//         "X-Mailer: PHP/" . phpversion();
 
-//     $mail->Subject = 'New Contact Form Submission';
-//     $mail->Body = "Name: $name\nEmail: $email\nSubject: $msg_subject\nPhone: $phone_number\nMessage: $message";
+//     // Email body
+//     $body = "Name: $name\nEmail: $email\nSubject: $msg_subject\nPhone: $phone_number\nMessage: $message";
 
-//     if ($mail->send()) {
+//     // Send the email using mail() function
+//     if (mail($to, $subject, $body, $headers)) {
 //         return true;
 //     } else {
 //         return false;
 //     }
 // }
 
-// Function to send email
-function sendEmail($name, $email, $msg_subject, $phone_number, $message) {
-    $from = "bmuit26@gmail.com"
-    // $to = $email; // Replace with recipient email address
-    $subject = 'New Contact Form Submission';
 
-    // Email headers
-    $headers = "From: $from" . "\r\n" .
-        "Reply-To: $email" . "\r\n" .
-        "X-Mailer: PHP/" . phpversion();
+// // Function to insert data into the database
+// // function insertDataIntoDatabase($name, $email, $msg_subject, $phone_number, $message) {
+// //     $dbHost = 'your_database_host'; // Replace with your database host
+// //     $dbUsername = 'your_database_username'; // Replace with your database username
+// //     $dbPassword = 'your_database_password'; // Replace with your database password
+// //     $dbName = 'your_database_name'; // Replace with your database name
 
-    // Email body
-    $body = "Name: $name\nEmail: $email\nSubject: $msg_subject\nPhone: $phone_number\nMessage: $message";
+// //     $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 
-    // Send the email using mail() function
-    if (mail($to, $subject, $body, $headers)) {
-        return true;
-    } else {
-        return false;
-    }
-}
+// //     if ($conn->connect_error) {
+// //         die("Connection failed: " . $conn->connect_error);
+// //     }
 
+// //     $sql = "INSERT INTO contact_form_data (name, email, msg_subject, phone_number, message) VALUES ('$name', '$email', '$msg_subject', '$phone_number', '$message')";
 
-// Function to insert data into the database
-// function insertDataIntoDatabase($name, $email, $msg_subject, $phone_number, $message) {
-//     $dbHost = 'your_database_host'; // Replace with your database host
-//     $dbUsername = 'your_database_username'; // Replace with your database username
-//     $dbPassword = 'your_database_password'; // Replace with your database password
-//     $dbName = 'your_database_name'; // Replace with your database name
+// //     if ($conn->query($sql) === TRUE) {
+// //         return true;
+// //     } else {
+// //         return false;
+// //     }
 
-//     $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+// //     $conn->close();
+// // }
 
-//     if ($conn->connect_error) {
-//         die("Connection failed: " . $conn->connect_error);
-//     }
+// // Check if the request method is POST
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     // Retrieve form data
+//     $name = $_POST["name"];
+//     $email = $_POST["email"];
+//     $msg_subject = $_POST["msg_subject"];
+//     $phone_number = $_POST["phone_number"];
+//     $message = $_POST["message"];
 
-//     $sql = "INSERT INTO contact_form_data (name, email, msg_subject, phone_number, message) VALUES ('$name', '$email', '$msg_subject', '$phone_number', '$message')";
+//     // Send email and insert data into the database
+//     $emailSent = sendEmail($name, $email, $msg_subject, $phone_number, $message);
+//     // $dataInserted = insertDataIntoDatabase($name, $email, $msg_subject, $phone_number, $message);
 
-//     if ($conn->query($sql) === TRUE) {
-//         return true;
+//     if ($emailSent) {
+//         // Return success message
+//         echo "success";
 //     } else {
-//         return false;
+//         // Return error message
+//         echo "Error occurred. Please try again later.";
 //     }
-
-//     $conn->close();
+// } else {
+//     // If the request method is not POST, return an error message
+//     echo "Invalid request method";
 // }
+
 
 // Check if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -82,19 +108,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone_number = $_POST["phone_number"];
     $message = $_POST["message"];
 
-    // Send email and insert data into the database
-    $emailSent = sendEmail($name, $email, $msg_subject, $phone_number, $message);
-    // $dataInserted = insertDataIntoDatabase($name, $email, $msg_subject, $phone_number, $message);
+    // You can perform validation and other processing on the data here
 
-    if ($emailSent) {
-        // Return success message
-        echo "success";
-    } else {
-        // Return error message
-        echo "Error occurred. Please try again later.";
-    }
+    // For this example, we'll just return a success message
+    $response = "success";
+    echo $response;
 } else {
     // If the request method is not POST, return an error message
-    echo "Invalid request method";
+    $response = "Invalid request method";
+    echo $response;
 }
 ?>
+
