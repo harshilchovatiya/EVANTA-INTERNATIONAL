@@ -21,7 +21,7 @@
         var msg_subject = $("#msg_subject").val();
         var phone_number = $("#phone_number").val();
         var message = $("#message").val();
-
+        console.log(name+""+email+""+ msg_subject+""+phone_number+""+message+"done");
         $.ajax({
             type: "POST",
             url: "assets/php/form-process.php",
